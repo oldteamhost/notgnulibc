@@ -245,11 +245,6 @@ int _getopt_internal(int argc, char * argv[], const char *shortopts,
   return opt;
 }
 
-int getopt(int argc, char * argv[], const char *opts)
-{
-  return _getopt(argc, argv, opts);
-}
-
 int getopt_long(int argc, char * argv[], const char *shortopts,
                 const struct option *longopts, int *longind)
 {

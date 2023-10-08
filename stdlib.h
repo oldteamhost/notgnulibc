@@ -12,16 +12,9 @@
 #include "string.h"
 #include "ngusyst/cdefs.h"
 #include "ngusyst/random.h"
+#include "ctype.h"
+
 #include "stddef.h" /* for size_t */
-
-#include <pthread.h>
-#include <sys/mman.h>
-
-typedef struct block_info
-{
-  int               size;
-  struct block_info *next;
-} block_info;
 
 typedef struct
 {
@@ -40,11 +33,6 @@ typedef struct
   ((j) < 0 ? -(j) : (j))
 
 __BEGIN_DECLS
-
-void*  malloc(size_t);
-void*  calloc(size_t nmemb, size_t size);
-void*  realloc(void *ptr, size_t size);
-void   free(void *p);
 
 int   rand(void);
 void  srand(unsigned seed);
@@ -65,15 +53,6 @@ strtoul(const char* nptr, char** endptr, int base);
 
 long
 strtol(const char* nptr, char** endptr, int base);
-
-void*         heap_allocate(size_t size);
-void*         find_best_fit_from_bin_large(size_t size);
-void*         mmap_new_memory(size_t size);
-void*         alloc_large(size_t size);
-void*         block_from_unused_heap(size_t size);
-void*         memalign(size_t alignment, size_t s);
-void*         align8(void *x);
-block_info**  get_bin(size_t size);
 
 __END_DECLS
 

@@ -8,6 +8,7 @@
 */
 
 #include "../ngusyst/printf.h"
+#include "../ngusyst/malloc.h"
 #include "../stdlib.h"
 #include "../string.h"
 #include "../ctype.h"

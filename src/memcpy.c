@@ -6,6 +6,7 @@
 */
 
 #include "../string.h"
+#include "../ngubits/types.h"
 
 typedef long word;
 #define wsize sizeof(word)
@@ -14,33 +15,35 @@ typedef long word;
 void*
 memcpy(void* s1, const void* s2, u64 length)
 {
-  char *dst = s1;
-  const char *src = s2;
+  char *dst;
+  const char *src;
   u64 t;
 
-  if (length == 0 || dst == src) { /* nothing to do */
+  dst = s1;
+  src = s2;
+
+  if (length == 0 || dst == src) {
     goto done;
   }
-
 #define TLOOP(s) if (t) TLOOP1(s)
 #define TLOOP1(s) do { s; } while (--t)
-
-  if ((u64)dst < (u64)src) {
-    t = (u64)src; /* only need low bits */
+  if ((unsigned long)dst < (unsigned long)src) {
+    t = (u64)src;
     if ((t | (u64)dst) & wmask) {
-      if ((t ^ (u64)dst) & wmask || length < wsize)
+      if ((t ^ (u64)dst) & wmask || length < wsize) {
         t = length;
-      else {
-        t = wsize - (t & wmask);
       }
-      length -= t;
-      TLOOP1(*dst++ = *src++);
+      else {
+      t = wsize - (t & wmask);
     }
-    t = length / wsize;
-    TLOOP(*(word *)(void *)dst = *(const word *)(const void *)src;
-      src += wsize; dst += wsize);
-    t = length & wmask;
-    TLOOP(*dst++ = *src++);
+    length -= t;
+    TLOOP1(*dst++ = *src++);
+  }
+  t = length / wsize;
+  TLOOP(*(word *)dst = *(const word *)src; src += wsize;
+  dst += wsize);
+  t = length & wmask;
+  TLOOP(*dst++ = *src++);
   }
   else {
     src += length;
@@ -58,7 +61,7 @@ memcpy(void* s1, const void* s2, u64 length)
     }
     t = length / wsize;
     TLOOP(src -= wsize; dst -= wsize;
-        *(word *)(void *)dst = *(const word *)(const void *)src);
+        *(word *)dst = *(const word *)src);
     t = length & wmask;
     TLOOP(*--dst = *--src);
   }

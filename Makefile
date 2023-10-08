@@ -1,7 +1,8 @@
 LIBRARY_NAME = ngulibc
 
 CC = clang
-CFLAGS = -Wall -Werror -I$(SRC_DIR) -fPIC
+CFLAGS = -Wall -Werror -I$(SRC_DIR) -pthread
+LDFLAGS = -pthread
 
 SRC_DIR = src
 OBJ_DIR = binary
@@ -11,16 +12,19 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-LIB_FILE = $(LIB_DIR)/lib$(LIBRARY_NAME).so
-LDFLAGS = -shared
+LIB_SHARED = $(LIB_DIR)/lib$(LIBRARY_NAME).so
+LIB_STATIC = $(LIB_DIR)/lib$(LIBRARY_NAME).a
 
-all: $(LIB_FILE)
+all: $(LIB_SHARED) $(LIB_STATIC)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
-$(LIB_FILE): $(OBJ_FILES) | $(LIB_DIR)
-		$(CC) $(LDFLAGS) $(OBJ_FILES) -o $(LIB_FILE)
+$(LIB_SHARED): $(OBJ_FILES) | $(LIB_DIR)
+		$(CC) $(LDFLAGS) -shared $(OBJ_FILES) -o $(LIB_SHARED)
+
+$(LIB_STATIC): $(OBJ_FILES) | $(LIB_DIR)
+		ar rcs $(LIB_STATIC) $(OBJ_FILES)
 
 clean:
 		rm -rf $(OBJ_FILES) $(LIB_DIR)

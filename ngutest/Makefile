@@ -1,7 +1,7 @@
 CC = clang
-CFLAGS = -Wall -I../src
-LDFLAGS = -L../build
-LDLIBS = -lngulibc
+CFLAGS = -Wall -I../src -g -O0 -fPIC
+LDFLAGS = -L../build -Wl,-rpath=../build
+LDLIBS = -lngulibc -pthread
 
 all: main
 
@@ -15,4 +15,3 @@ clean:
 		rm -f main main.o
 
 .PHONY: all clean
-

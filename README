@@ -1,6 +1,6 @@
 2023 - lomaster & oldteam
 notgnulibc
 
-Standart:       ANSI C
-License:        BSD 3
-Architectures:  64 bits, 32 bits
+Standart:  ANSI C
+License:   BSD 3
+Support:   64,86 bits

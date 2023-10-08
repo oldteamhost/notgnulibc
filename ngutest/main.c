@@ -1,7 +1,9 @@
-#include "../unistd.h"
-#include <stdio.h>
+#include "../ngusyst/malloc.h"
 
 int main(void)
 {
-  ngu_abort(0);
+  size_t size = 12;
+  void *mem = malloc(size);
+  free(mem);
+  return 0;
 }

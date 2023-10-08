@@ -30,6 +30,7 @@
 #include "../ngusyst/printf.h"
 #include "../stdlib.h"
 #include "../string.h"
+#include <unistd.h>
 
 __BEGIN_DECLS
 
