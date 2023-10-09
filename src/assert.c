@@ -8,18 +8,21 @@
 #include "../assert.h"
 
 void
-assert(const char* func, const char* file, int line, const char* expression)
+__assert(const char* func, const char* file, int line, const char* expression)
 {
+  char message[4096];
+  int len = 0;
   if (func == NULL) {
-    printf("Assertion failed: (%s), file %s, line %d.",
+    len = snprintf(message, sizeof(message), "Assertion failed: (%s), file %s, line %d.\n",
         expression, file, line);
-    ngu_abort(1);
+    _write(2, message, len);
+    _abort(1);
   }
   else {
-    printf(
-      "Assertion failed: (%s), function %s, file %s, line %d.",
-      expression, func, file, line);
-    ngu_abort(1);
+    len = snprintf(message, sizeof(message), "Assertion failed: (%s), function %s, file %s, line %d.\n",
+        expression, func, file, line);
+    _write(2, message, len);
+    _abort(1);
   }
 }
 

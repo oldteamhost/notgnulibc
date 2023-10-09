@@ -7,7 +7,7 @@
 
 #include "../unistd.h"
 
-int ngu_getpagesize(void)
+int _getpagesize(void)
 {
   int result;
   asm volatile(

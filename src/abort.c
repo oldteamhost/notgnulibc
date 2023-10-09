@@ -7,7 +7,7 @@
 
 #include "../unistd.h"
 
-void ngu_abort(int code)
+void _abort(int code)
 {
   asm("movl %0, %%edi; call exit" : : "r"(code));
 }

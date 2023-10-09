@@ -14,14 +14,15 @@
 #include "stddef.h"
 
 __BEGIN_DECLS
+
 extern char **__environ;
 
-char* sbrk(int incr);
+char* _sbrk(int incr);
 
 /* asm functions */
-size_t ngu_write(int fd, const void *dest, size_t bcount);
-int ngu_getpagesize(void);
-void ngu_abort(int code);
+size_t _write(int fd, const void *dest, size_t bcount);
+int _getpagesize(void);
+void _abort(int code);
 
 __END_DECLS
 

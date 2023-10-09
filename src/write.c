@@ -7,7 +7,7 @@
 
 #include "../unistd.h"
 
-size_t ngu_write(int fd, const void *dest, size_t bcount)
+size_t _write(int fd, const void *dest, size_t bcount)
 {
   size_t bytes_written;
 

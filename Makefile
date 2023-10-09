@@ -1,8 +1,8 @@
 LIBRARY_NAME = ngulibc
 
 CC = clang
-CFLAGS = -Wall -Werror -I$(SRC_DIR) -pthread
-LDFLAGS = -pthread
+CFLAGS = -Wall -Werror -I$(SRC_DIR) -pthread -fPIC
+LDFLAGS = -pthread -shared
 
 SRC_DIR = src
 OBJ_DIR = binary
@@ -18,10 +18,10 @@ LIB_STATIC = $(LIB_DIR)/lib$(LIBRARY_NAME).a
 all: $(LIB_SHARED) $(LIB_STATIC)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) -fPIC -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB_SHARED): $(OBJ_FILES) | $(LIB_DIR)
-		$(CC) $(LDFLAGS) -shared $(OBJ_FILES) -o $(LIB_SHARED)
+		$(CC) $(LDFLAGS) $(OBJ_FILES) -o $(LIB_SHARED)
 
 $(LIB_STATIC): $(OBJ_FILES) | $(LIB_DIR)
 		ar rcs $(LIB_STATIC) $(OBJ_FILES)

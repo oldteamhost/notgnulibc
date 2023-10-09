@@ -1,9 +1,9 @@
-#include "../ngusyst/malloc.h"
+#include "../assert.h"
+#include "../ngusyst/printf.h"
 
 int main(void)
 {
-  size_t size = 12;
-  void *mem = malloc(size);
-  free(mem);
+  assert(10 == 0);
+  printf("hekefk\n");
   return 0;
 }

@@ -10,5 +10,5 @@
 
 int putchar(int c)
 {
-  return (ngu_write(1, &c, 1));
+  return (_write(1, &c, 1));
 }

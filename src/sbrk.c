@@ -13,7 +13,7 @@ static size_t maxheap, heapsize = 0;
 static void *heapbased;
 
 char *
-sbrk(int incr)
+_sbrk(int incr)
 {
   char *ret;
   if (heapbased == 0) {
