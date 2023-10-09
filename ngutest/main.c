@@ -3,7 +3,8 @@
 
 int main(void)
 {
-  assert(10 == 0);
-  printf("hekefk\n");
+  printf("Hello, world!\n");
+  assert(10 == 9);
+  printf("Goodbye world!\n");
   return 0;
 }

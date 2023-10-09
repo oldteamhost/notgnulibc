@@ -57,6 +57,22 @@ typedef unsigned char        ___u_char;
   typedef unsigned long long int __uintmax_t;
 #endif
 
+#if __WORDSIZE == 64
+  typedef ___int64_t  __intptr_t;
+  typedef ___int64_t  __intfptr_t;
+  typedef ___uint64_t __uintptr_t;
+  typedef ___uint64_t __uintfptr_t;
+  typedef ___uint64_t __vm_offset_t;
+  typedef ___uint64_t __vm_size_t;
+#else
+  typedef ___int32_t  __intptr_t;
+  typedef ___int32_t  __intfptr_t;
+  typedef ___uint32_t __uintptr_t;
+  typedef ___uint32_t __uintfptr_t;
+  typedef ___uint32_t __vm_offset_t;
+  typedef ___uint32_t __vm_size_t;
+#endif
+
 /* notgnu default types */
 typedef ___uint64_t u64;
 typedef ___uint32_t u32;
