@@ -55,6 +55,5 @@ __END_DECLS
 #define LDBL_MAX         ((long double)DBL_MAX)
 #define LDBL_MAX_10_EXP  DBL_MAX_10_EXP
 
-
 #endif
 
