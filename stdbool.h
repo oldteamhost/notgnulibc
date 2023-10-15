@@ -8,7 +8,7 @@
 #ifndef NOTGNU_STDBOOL_H
 #define NOTGNU_STDBOOL_H
 
-#ifndef bool
+#ifndef bool /* from compiler */
   #define bool _Bool
 #endif
 

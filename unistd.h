@@ -12,17 +12,20 @@
 #include "ngubits/types.h"
 #include "ngusyst/cdefs.h"
 #include "stddef.h"
+#include "stdnoreturn.h"
 
 __BEGIN_DECLS
 
 extern char **__environ;
 
 char* _sbrk(int incr);
-
 /* asm functions */
+noreturn void __exit(int code);
+noreturn void __abort(void);
+
 size_t _write(int fd, const void *dest, size_t bcount);
+
 int _getpagesize(void);
-void _abort(int code);
 
 __END_DECLS
 

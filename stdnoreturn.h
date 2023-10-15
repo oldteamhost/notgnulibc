@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
-#ifdef __cplusplus
-  #error "<stdnoreturn.h> cannot be used in combination with C++11"
+#ifndef noreturn /* from compiler */
+  #define noreturn _Noreturn
 #endif
 
-#ifndef noreturn
-  #define noreturn _Noreturn
+#ifdef __cplusplus
+  #error "<stdnoreturn.h> cannot be used in combination with C++11"
 #endif
 

@@ -5,15 +5,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
-#include "../stdlib.h"
+#include "../unistd.h"
 
-div_t
-div(int num, int denom)
+noreturn void __exit(int code)
 {
-  div_t result;
-
-  result.quot = num / denom;
-  result.rem  = num % denom;
-
-  return result;
+  asm("movl %0, %%edi; call exit" : : "r"(code));
+  while(1);
 }

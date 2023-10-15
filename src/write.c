@@ -17,10 +17,10 @@ size_t _write(int fd, const void *dest, size_t bcount)
    "movl $4, %%eax\n"
     "movl %[fd], %%ebx\n"
     "movl %[buf], %%ecx\n"
-    "movl %[count], %%edx\n"
+    "movl %[bcount], %%edx\n"
     "int $0x80\n"
-    : "=a" (result)
-    : [fd] "g" (fd), [buf] "g" (buf), [count] "g" (count)
+    : "=a" (dest)
+    : [fd] "g" (fd), [buf] "g" (dest), [bcount] "g" (bcount)
     : "%ebx", "%ecx", "%edx", "memory"
 #else
     "movq $1, %%rax \n"

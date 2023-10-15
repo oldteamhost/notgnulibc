@@ -7,7 +7,18 @@
 
 #include "../unistd.h"
 
-void _abort(int code)
+noreturn void __abort(void)
 {
-  asm("movl %0, %%edi; call exit" : : "r"(code));
+  asm volatile(
+#ifdef __KERNEL86
+    "mov $1, %eax\n"
+    "mov $1, %ebx\n"
+    "int $0x80"
+#else
+    "mov $60, %rax\n"
+    "mov $1, %rdi\n"
+    "syscall"
+#endif
+  );
+  while (1);
 }

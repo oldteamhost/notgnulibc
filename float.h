@@ -11,7 +11,7 @@
 #include "ngusyst/cdefs.h"
 
 __BEGIN_DECLS
-extern int __flt_rounds(void);
+int __flt_rounds(void);
 __END_DECLS
 
 #define FLT_RADIX 2

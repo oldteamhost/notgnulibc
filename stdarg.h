@@ -12,7 +12,7 @@
 
 typedef __va_list va_list;
 
-# if defined(__GNUC__) && __GNUC__ >= 3
+#if defined(__GNUC__) && __GNUC__ >= 3
   #define va_start(ap, arg) __builtin_va_start((ap), (arg))
   #define va_arg __builtin_va_arg
   #define va_copy __builtin_va_copy

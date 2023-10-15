@@ -49,6 +49,15 @@ typedef unsigned char        ___u_char;
   typedef unsigned long long int  ___u_quad_t;
 #endif
 
+typedef ___int8_t __int_least8_t;
+typedef ___uint8_t __uint_least8_t;
+typedef ___int16_t __int_least16_t;
+typedef ___uint16_t __uint_least16_t;
+typedef ___int32_t __int_least32_t;
+typedef ___uint32_t __uint_least32_t;
+typedef ___int64_t __int_least64_t;
+typedef ___uint64_t __uint_least64_t;
+
 #if __WORDSIZE == 64
   typedef long int               __intmax_t;
   typedef unsigned long int      __uintmax_t;

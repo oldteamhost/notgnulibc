@@ -27,6 +27,7 @@ static const double
   qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
   qS4 =  7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
+/* 𝑎𝑐𝑜𝑠(𝑥) = 𝜋/2 − 𝑎𝑟𝑐𝑠𝑖𝑛(𝑥) */
 double
 acos(double x)
 {
@@ -59,7 +60,7 @@ acos(double x)
   }
   else if (hx < 0) {
     z = (one+x)*0.5;
-    p = z*(pS0+z*(pS1+z*(pS2+z*(pS3+z*(pS4+z*pS5)))));
+    p = z* (pS0+z*(pS1+z*(pS2+z*(pS3+z*(pS4+z*pS5)))));
     q = one+z*(qS1+z*(qS2+z*(qS3+z*qS4)));
     s = sqrt(z);
     r = p/q;

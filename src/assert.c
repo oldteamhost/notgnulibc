@@ -10,19 +10,19 @@
 void
 __assert(const char* func, const char* file, int line, const char* expression)
 {
-  char message[4096];
   int len = 0;
+  char* message = NULL;
+
   if (func == NULL) {
-    len = snprintf(message, sizeof(message), "Assertion failed: (%s), file %s, line %d.\n",
-        expression, file, line);
-    _write(2, message, len);
-    _abort(1);
+    len = asprintf(&message, "Assertion failed: (%s), file %s, line %d.\n", expression, file, line);
+    goto stderrwrite;
   }
   else {
-    len = snprintf(message, sizeof(message), "Assertion failed: (%s), function %s, file %s, line %d.\n",
-        expression, func, file, line);
-    _write(2, message, len);
-    _abort(1);
+    len = asprintf(&message, "Assertion failed: (%s), file %s, line %d.\n", expression, file, line);
+    goto stderrwrite;
   }
+stderrwrite:
+  _write(2, message, len);
+  __abort();
 }
 

@@ -5,15 +5,10 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
-#include "../stdlib.h"
+#include "../float.h"
 
-div_t
-div(int num, int denom)
+int __flt_rounds(void)
 {
-  div_t result;
-
-  result.quot = num / denom;
-  result.rem  = num % denom;
-
-  return result;
+  /*TODO*/
+  return -1;
 }
