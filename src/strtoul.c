@@ -61,8 +61,9 @@ strtoul(const char *nptr, char **endptr, int base)
   if (any < 0) {
     acc = ULONG_MAX;
   }
-  else if (neg)
+  else if (neg) {
     acc = -acc;
+  }
   if (endptr != NULL) {
     *endptr = (char *)(any ? s - 1 : nptr);
   }

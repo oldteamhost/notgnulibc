@@ -11,6 +11,7 @@
 #include "string.h"
 #include "ngusyst/cdefs.h"
 #include "ngusyst/printf.h"
+#include "stdlib.h"
 #include "unistd.h"
 
 #ifdef NDEBUG /* disable assert */

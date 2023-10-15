@@ -7,8 +7,8 @@
 
 #include "../stdlib.h"
 
-noreturn void __exit(int code)
+double atof(const char* s)
 {
-  asm("movl %0, %%edi; call exit" : : "r"(code));
-  while(1);
+  return strtod(s, (char **)NULL);
 }
+

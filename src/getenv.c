@@ -7,20 +7,22 @@
 
 #include "../stdlib.h"
 
+/* from compiler */
+extern char **__environ;
+
 char*
-getenv (const char *name)
-{ 
-  /*
+getenv(const char *name)
+{
   if (__environ == NULL || name[0] == '\0') {
     return NULL;
   }
 
   size_t len = strlen(name);
   for (char **ep = __environ; *ep != NULL; ++ep) {
-    if (name[0] == (*ep)[0] && strncmp (name, *ep, len) == 0 && (*ep)[len] == '=') {
+    if (name[0] == (*ep)[0] && strncmp (name, *ep, len) == 0
+        && (*ep)[len] == '=') {
       return *ep + len + 1;
     }
   }
-  */
   return NULL;
 }

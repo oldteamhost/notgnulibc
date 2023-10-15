@@ -13,6 +13,12 @@
 #include "ngubits/types.h"
 #include "ngusyst/cdefs.h"
 
+#define HUGE_VAL  1e10000
+#define HUGE_VALF 1e10000f
+#define HUGE_VALL 1e10000L
+#define NAN (0.0f / 0.0f)
+#define INFINITY  HUGE_VALF
+
 #define M_E        2.7182818284590452354  /* e */
 #define M_LOG2E    1.4426950408889634074  /* log 2e */
 #define M_LOG10E   0.43429448190325182765 /* log 10e */
@@ -35,6 +41,16 @@
   #define abs(x) \
     ((x) < 0 ? -(x) : (x))
 #endif
+
+typedef union
+{
+  double value;
+  struct
+  {
+    u32 lsw;
+    u32 msw;
+  } parts;
+} ieee_double_shape_type;
 
 #define SET_LOW_WORD(d,v)       \
 do {                            \
@@ -119,16 +135,6 @@ double pow(double, double);
 double ceil(double);
 double floor(double);
 double fmod(double, double);
-
-typedef union
-{
-  double value;
-  struct
-  {
-    u32 lsw;
-    u32 msw;
-  } parts;
-} ieee_double_shape_type;
 
 __END_DECLS
 

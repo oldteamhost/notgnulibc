@@ -26,23 +26,33 @@ typedef struct
   long int quot, rem;
 } ldiv_t;
 
-#define abs(x) \
-  ((x) < 0 ? -(x) : (x))
-
-#define labs(j) \
-  ((j) < 0 ? -(j) : (j))
-
 __BEGIN_DECLS
 
-int   rand(void);
-void  srand(unsigned seed);
+/* done */
+int    atoi(const char* s);
+long   atol(const char* s);
+double atof(const char* s);
+double strtod(const char* str, char** endptr);
 
-int  atoi(const char* s);
-long atol(const char* s);
+/* Eigenfunctions */
+#include "stdnoreturn.h"
+noreturn void __exit(int code);
+noreturn void __abort(void);
+char* getenv(const char* name);
 
-char*  getenv(const char* name);
+/* import from linux */
+extern void exit(int code);
+extern void abort(void);
+
+#define abs(x) \
+  ((x) < 0 ? -(x) : (x))
+#define labs(j) \
+  ((j) < 0 ? -(j) : (j))
 div_t  div(int num, int denom);
 ldiv_t ldiv(long num, long denom);
+
+int    rand(void);
+void   srand(unsigned seed);
 
 void*
 bsearch(const void *key, const void *base0, size_t nmemb, size_t size,
