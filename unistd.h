@@ -15,13 +15,11 @@
 
 __BEGIN_DECLS
 
-extern char **__environ;
+void* _brk(void* nbrk);
+void* _sbrk(int incr);
 
-char* _sbrk(int incr);
-/* asm functions */
 
 size_t _write(int fd, const void *dest, size_t bcount);
-
 int _getpagesize(void);
 
 __END_DECLS

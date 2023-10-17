@@ -18,7 +18,7 @@ __assert(const char* func, const char* file, int line, const char* expression)
     goto stderrwrite;
   }
   else {
-    len = asprintf(&message, "Assertion failed: (%s), file %s, line %d.\n", expression, file, line);
+    len = asprintf(&message, "Assertion failed: (%s), file %s, function %s, line %d.\n", expression, file, func, line);
     goto stderrwrite;
   }
 

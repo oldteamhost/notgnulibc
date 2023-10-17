@@ -8,32 +8,15 @@
 #ifndef NOTGNU_MALLOC_H
 #define NOTGNU_MALLOC_H
 
-#include <sys/mman.h>
-#include <unistd.h>
-#include <pthread.h>
-
 #include "../limits.h"
 #include "../stddef.h"
 #include "../string.h"
+#include "../unistd.h"
 
-typedef struct block_info
-{
-  int    size;
-  struct block_info *next;
-} block_info;
+void* realloc(void* p, size_t size);
+void* malloc(size_t size);
+void* calloc(size_t number, size_t size);
 
-void* malloc(size_t);
-void* calloc(size_t nmemb, size_t size);
-void* realloc(void *ptr, size_t size);
-void* memalign(size_t alignment, size_t s);
-void  free(void *p);
-
-void* align8(void *x);
-void* heap_allocate(size_t size);
-void* find_best_fit_from_bin_large(size_t size);
-void* mmap_new_memory(size_t size);
-void* alloc_large(size_t size);
-void* block_from_unused_heap(size_t size);
-block_info** get_bin(size_t size);
+void free(void* ptr);
 
 #endif

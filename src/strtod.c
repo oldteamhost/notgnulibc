@@ -6,6 +6,8 @@
 */
 
 #include "../stdlib.h"
+#include "../float.h"
+#include "../math.h"
 
 double
 strtod(const char* str, char** endptr)
@@ -38,7 +40,6 @@ strtod(const char* str, char** endptr)
     num_digits++;
   }
 
-  // Process decimal part
   if (*p == '.') {
     p++;
 
@@ -51,8 +52,6 @@ strtod(const char* str, char** endptr)
 
     exponent -= num_decimals;
   }
-#include "../float.h"
-#include "../math.h"
   if (num_digits == 0) {
     return 0.0;
   }

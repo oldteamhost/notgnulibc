@@ -7,11 +7,12 @@ all: main
 
 main: main.o
 		$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+		rm -f main.o
 
 main.o: main.c
 		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f main main.o
+		rm -f main
 
 .PHONY: all clean

@@ -11,6 +11,7 @@
 
 #include "../ngusyst/printf.h"
 #include "../ngusyst/malloc.h"
+#include "../ngubits/types.h"
 #include "../stdlib.h"
 #include "../string.h"
 #include "../ctype.h"
@@ -367,7 +368,7 @@ reswitch:
         *(va_arg(ap, __intmax_t *)) = retval;
       }
       else if (qflag) {
-        *(va_arg(ap, __quad_t *)) = retval;
+        *(va_arg(ap, ___quad_t *)) = retval;
       }
       else if (lflag) {
         *(va_arg(ap, long *)) = retval;
@@ -461,13 +462,13 @@ handle_nosign:
         num = va_arg(ap, __uintmax_t);
       }
       else if (qflag) {
-        num = va_arg(ap, __u_quad_t);
+        num = va_arg(ap, ___u_quad_t);
       }
       else if (tflag) {
         num = va_arg(ap, ptrdiff_t);
       }
       else if (lflag) {
-        num = va_arg(ap, __u_long);
+        num = va_arg(ap, ___u_long);
       }
       else if (zflag) {
         num = va_arg(ap, size_t);
@@ -486,7 +487,7 @@ handle_sign:
     if (jflag)
       num = va_arg(ap, __intmax_t);
     else if (qflag) {
-      num = va_arg(ap, __quad_t);
+      num = va_arg(ap, ___quad_t);
     }
     else if (tflag) {
       num = va_arg(ap, ptrdiff_t);
@@ -495,7 +496,7 @@ handle_sign:
       num = va_arg(ap, long);
     }
     else if (zflag) {
-      num = va_arg(ap, ssize_t);
+      num = va_arg(ap, size_t);
     }
     else if (hflag) {
       num = (short)va_arg(ap, int);

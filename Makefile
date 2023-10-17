@@ -1,6 +1,6 @@
 LIBRARY_NAME = ngulibc
 
-CC = clang
+CC = gcc
 CFLAGS = -Wall -I$(SRC_DIR) -pthread -fPIC
 LDFLAGS = -pthread -shared
 
