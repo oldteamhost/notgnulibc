@@ -1,6 +1,7 @@
 #include "../assert.h"
 #include "../unistd.h"
 #include "../ngusyst/malloc.h"
+#include "../unistd.h"
 #include "../ngubits/types.h"
 
 int main(void)
@@ -24,14 +25,14 @@ int main(void)
   assert(_result != (void*)-1);
 
   /* malloc() */
-  int* ptr_malloc = (int*)malloc(5 * sizeof(int));
-  assert(ptr_malloc != NULL);
-  free(ptr_malloc);
+  size_t size = 12;
+  void *mem = malloc(size);
+  assert(mem != NULL);
+  free(mem);
 
-  /* calloc() */
-  int* ptr_calloc = (int*)calloc(5, sizeof(int));
-  assert(ptr_calloc != NULL);
-  free(ptr_calloc);
+  /* __getpagesize() */
+  int page_size = __getpagesize();
+  assert(page_size > 0);
 
   printf("Goodbye, world!\n");
   return 0;

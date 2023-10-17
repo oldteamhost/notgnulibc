@@ -7,18 +7,10 @@
 
 #include "../unistd.h"
 
-int _getpagesize(void)
-{
-  int result;
-  asm volatile(
-    "mov $158, %%rax\n\t"
-    "mov $0, %%rdi\n\t"
-    "syscall\n\t"
-    "mov %%eax, %0"
-    : "=r" (result)
-    :
-    : "rax", "rdi"
-  );
-  return result;
-}
 
+int __getpagesize(void)
+{
+#include <unistd.h>
+  /* TODO */
+  return sysconf(_SC_PAGESIZE);
+}

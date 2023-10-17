@@ -20,7 +20,7 @@ void* _sbrk(int incr);
 
 
 size_t _write(int fd, const void *dest, size_t bcount);
-int _getpagesize(void);
+int __getpagesize(void);
 
 __END_DECLS
 
