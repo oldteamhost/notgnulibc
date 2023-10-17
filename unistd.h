@@ -17,8 +17,6 @@ __BEGIN_DECLS
 
 void* _brk(void* nbrk);
 void* _sbrk(int incr);
-
-
 size_t _write(int fd, const void *dest, size_t bcount);
 int __getpagesize(void);
 

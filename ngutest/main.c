@@ -1,8 +1,14 @@
 #include "../assert.h"
 #include "../unistd.h"
 #include "../ngusyst/malloc.h"
-#include "../unistd.h"
+#include "../stdlib.h"
 #include "../ngubits/types.h"
+#include <stdio.h>
+
+int com_interg(const void* a, const void* b)
+{
+  return (*(int*)a - *(int*)b);
+}
 
 int main(void)
 {
@@ -33,6 +39,31 @@ int main(void)
   /* __getpagesize() */
   int page_size = __getpagesize();
   assert(page_size > 0);
+
+  /* bsearch() */
+  int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int key = 5;
+  int* __result = (int*)bsearch(&key, arr, sizeof(arr) / sizeof(arr[0]), sizeof(int), com_interg);
+  assert(__result != NULL);
+  assert(*__result == key);
+
+  /* heapsort() */
+  int _arr[] = {9, 2, 5, 1, 6, 3, 8, 4, 7};
+  int expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  size_t nmemb = sizeof(_arr) / sizeof(_arr[0]);
+  heapsort(_arr, nmemb, sizeof(int), com_interg);
+  for (size_t i = 0; i < nmemb; i++) {
+    assert(_arr[i] == expected[i]);
+  }
+
+  /* qsort() */
+  int __arr[] = {9, 2, 5, 1, 6, 3, 8, 4, 7};
+  int _expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  size_t _nmemb = sizeof(__arr) / sizeof(__arr[0]);
+  qsort(__arr, _nmemb, sizeof(int), com_interg);
+  for (size_t i = 0; i < _nmemb; i++) {
+    assert(__arr[i] == _expected[i]);
+  }
 
   printf("Goodbye, world!\n");
   return 0;
