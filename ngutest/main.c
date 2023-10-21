@@ -3,7 +3,6 @@
 #include "../ngusyst/malloc.h"
 #include "../stdlib.h"
 #include "../ngubits/types.h"
-#include <stdio.h>
 
 int com_interg(const void* a, const void* b)
 {
@@ -64,6 +63,10 @@ int main(void)
   for (size_t i = 0; i < _nmemb; i++) {
     assert(__arr[i] == _expected[i]);
   }
+
+  srand(time(NULL));
+  int secret = rand() % 1238949230 + 1;
+  printf("%d\n", secret);
 
   printf("Goodbye, world!\n");
   return 0;
