@@ -12,6 +12,7 @@
 #include "../stddef.h"
 #include "../string.h"
 #include "../unistd.h"
+#include "cdefs.h"
 
 #include <sys/mman.h>
 #include <pthread.h>
@@ -21,6 +22,8 @@ typedef struct block_info
   int size;
   struct block_info *next;
 }block_info;
+
+__BEGIN_DECLS
 
 void* malloc(size_t);
 void* calloc(size_t nmemb, size_t size);
@@ -36,5 +39,7 @@ void* mmap_new_memory(size_t size);
 void* alloc_large(size_t size);
 void* block_from_unused_heap(size_t size);
 void* memalign(size_t alignment, size_t s);
+
+__END_DECLS
 
 #endif

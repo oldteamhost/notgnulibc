@@ -30,14 +30,19 @@ typedef struct
 } ldiv_t;
 
 __BEGIN_DECLS
+
 extern void exit(int code);
 extern void abort(void);
 
 int    atoi(const char* s);
 long   atol(const char* s);
-double atof(const char* s); /* TODO */
+double atof(const char* s);
+
+int    rand(void);
+void   srand(unsigned seed);
 
 char* getenv(const char* name);
+int _system(const char* command); /* TODO */
 noreturn void __exit(int code);
 noreturn void __abort(void);
 
@@ -68,9 +73,6 @@ strtoul(const char* nptr, char** endptr, int base);
 
 long
 strtol(const char* nptr, char** endptr, int base);
-
-int    rand(void);
-void   srand(unsigned seed);
 
 __END_DECLS
 

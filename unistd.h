@@ -11,6 +11,7 @@
 #include "stdarg.h"
 #include "ngubits/types.h"
 #include "ngusyst/cdefs.h"
+#include "ngumore/getopt.h"
 #include "stddef.h"
 
 __BEGIN_DECLS
@@ -18,6 +19,7 @@ __BEGIN_DECLS
 void* _brk(void* nbrk);
 void* _sbrk(int incr);
 size_t _write(int fd, const void *dest, size_t bcount);
+int _close(int fd);
 int __getpagesize(void);
 
 __END_DECLS

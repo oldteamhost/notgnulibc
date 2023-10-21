@@ -13,11 +13,11 @@
 #include "ngubits/types.h"
 #include "ngusyst/cdefs.h"
 
-#define HUGE_VAL  1e10000
-#define HUGE_VALF 1e10000f
-#define HUGE_VALL 1e10000L
-#define NAN (0.0f / 0.0f)
-#define INFINITY  HUGE_VALF
+#define HUGE_VAL (__builtin_huge_val ())
+#define HUGE_VALF (__builtin_huge_valf ())
+#define HUGE_VALL (__builtin_huge_vall ())
+#define INFINITY (__builtin_inff ())
+#define NAN (__builtin_nanf(""))
 
 #define M_E        2.7182818284590452354  /* e */
 #define M_LOG2E    1.4426950408889634074  /* log 2e */

@@ -16,7 +16,7 @@ strtod(const char* str, char** endptr)
   int exponent;
   int negative;
   char *p = (char *) str;
-  double p10 = 0.0;
+  double p10;
   int n;
   int num_digits;
   int num_decimals;
@@ -52,11 +52,13 @@ strtod(const char* str, char** endptr)
 
     exponent -= num_decimals;
   }
+
   if (num_digits == 0) {
     return 0.0;
   }
 
   if (negative) number = -number;
+
   if (*p == 'e' || *p == 'E') {
     negative = 0;
     switch (*++p) {
@@ -78,9 +80,10 @@ strtod(const char* str, char** endptr)
   }
 
   if (exponent < DBL_MIN_EXP  || exponent > DBL_MAX_EXP) {
-    return DBL_MAX_EXP;
+    return HUGE_VALF;
   }
 
+  p10 = 10.;
   n = exponent;
   if (n < 0) n = -n;
   while (n) {

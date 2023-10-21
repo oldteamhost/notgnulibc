@@ -1,5 +1,6 @@
 #include "../assert.h"
 #include "../unistd.h"
+#include "../ngucrypt/md5.h"
 #include "../ngusyst/malloc.h"
 #include "../stdlib.h"
 #include "../ngubits/types.h"
@@ -11,8 +12,6 @@ int com_interg(const void* a, const void* b)
 
 int main(void)
 {
-  printf("Hello, world!\n");
-
   /* _brk() */
   void* original_brk = _brk(NULL);
   void* new_brk = (void*)((__uintptr_t)original_brk + 4096);
@@ -64,9 +63,35 @@ int main(void)
     assert(__arr[i] == _expected[i]);
   }
 
+  /* (s)rand() */
   srand(time(NULL));
   int secret = rand() % 1238949230 + 1;
-  printf("%d\n", secret);
+  assert(secret != 0);
+
+  /* md5 */
+  const char* input_data = "hello";
+  size_t input_length = strlen(input_data);
+
+  char* _hex_hash = md5str(input_data, input_length);
+  if (_hex_hash != NULL) {
+    printf("MD5 Hash: %s\n", _hex_hash);
+    free(_hex_hash);
+  }
+
+#include "../ngucrypt/sha256.h"
+  /* sha256 */
+  char* hex_hash = sha256str(input_data, input_length);
+  if (hex_hash != NULL) {
+    printf("SHA-256 Hash: %s\n", hex_hash);
+    free(hex_hash);
+  }
+
+#include "../ngucrypt/sha512.h"
+  char* __hex_hash = sha512str(input_data, input_length);
+  if (__hex_hash != NULL) {
+    printf("SHA-512 Hash: %s\n", __hex_hash);
+    free(__hex_hash);
+  }
 
   printf("Goodbye, world!\n");
   return 0;
