@@ -18,6 +18,8 @@
 typedef ___uint32_t md5_uint32;
 typedef __uintptr_t md5_uintptr;
 
+__BEGIN_DECLS
+
 struct md5_ctx
 {
   md5_uint32 A;
@@ -33,8 +35,6 @@ struct md5_ctx
     md5_uint32 buffer32[32];
   };
 };
-
-__BEGIN_DECLS
 
 /* encrypt buf to md5 (void) */
 void *md5(const void *buf, ___size_t buflen);

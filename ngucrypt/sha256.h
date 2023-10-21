@@ -14,6 +14,8 @@
 #include "../string.h"
 #include "../stdlib.h"
 
+__BEGIN_DECLS
+
 struct sha256_ctx
 {
   u32 H[8];
@@ -32,8 +34,6 @@ struct sha256_ctx
     u64 buffer64[16];
   };
 };
-
-__BEGIN_DECLS
 
 /* encrypt buf to md5 (void) */
 void *sha256(const void *buf, ___size_t buflen);

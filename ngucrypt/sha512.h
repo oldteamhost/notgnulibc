@@ -15,6 +15,8 @@
 #include "../string.h"
 #include "../stdlib.h"
 
+__BEGIN_DECLS
+
 struct sha512_ctx
 {
   u64 H[8];
@@ -46,6 +48,8 @@ void sha512_init_ctx(struct sha512_ctx *ctx);
 void sha512_process_bytes(const void *buffer, size_t len, struct sha512_ctx *ctx);
 void sha512_process_block(const void *buffer, size_t len, struct sha512_ctx *ctx);
 void *sha512_finish_ctx(struct sha512_ctx *ctx, void *resbuf);
+
+__END_DECLS
 
 #endif
 

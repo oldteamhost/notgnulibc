@@ -508,6 +508,6 @@ int printf(const char *format, ...) {
     return -1;
   }
 
-  write(1, buffer, (size_t)len);
+  _write(1, buffer, (size_t)len);
   return len;
 }
