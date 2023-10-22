@@ -8,3 +8,12 @@ nn   nn      gg  uuuu u lll iii bbbbbb   ccccc
 
 Standart:  ANSI C
 Support:   x86 (64,32-bits)
+
+1. [Install clang for compile]
+- sudo pacman -S clang
+- sudo apt install clang
+
+2. [Install ngulibc]
+- git clone https://github.com/oldteamhost/notgnulibc.git
+- cd notgnulibc
+- make
