@@ -4,6 +4,7 @@
 #include "../ngusyst/malloc.h"
 #include "../stdlib.h"
 #include "../ngubits/types.h"
+#include "../stdio.h"
 
 int com_interg(const void* a, const void* b)
 {
@@ -86,12 +87,31 @@ int main(void)
     free(hex_hash);
   }
 
+  /* sha512 */
 #include "../ngucrypt/sha512.h"
   char* __hex_hash = sha512str(input_data, input_length);
   if (__hex_hash != NULL) {
     printf("SHA-512 Hash: %s\n", __hex_hash);
     free(__hex_hash);
   }
+
+  /* open() */
+#include "../ngubits/fcntl.h"
+  int fd = open("kek.txt", O_RDWR, 0644);
+  if (fd < 0) {
+    printf("fuck!\n");
+    return 1;
+  }
+  _write(fd, "Hello\n", 6);
+  _write(fd, "Hello\n", 6);
+  _write(fd, "Hello\n", 6);
+  /* close() */
+  _close(fd);
+
+  FILE *fp;
+  fp = fopen ("net.txt", "a");
+  fprintf(fp, "kekekkek\n");
+  fclose(fp);
 
   printf("Goodbye, world!\n");
   return 0;

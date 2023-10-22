@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
-#include "../ngusyst/printf.h"
+#include "../stdio.h"
 #include "../unistd.h"
 
 int putchar(int c)

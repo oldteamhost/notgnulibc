@@ -27,8 +27,8 @@
 #define NGU_GETOPT_H
 
 #include "../ngusyst/cdefs.h"
-#include "../ngusyst/printf.h"
 #include "../stdlib.h"
+#include "../stdio.h"
 #include "../string.h"
 
 __BEGIN_DECLS

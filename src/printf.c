@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
 */
 
-#include "../ngusyst/printf.h"
+#include "../stdio.h"
 #include "../ngusyst/malloc.h"
 #include "../ngubits/types.h"
 #include "../stdlib.h"
@@ -390,7 +390,6 @@ repeat:
         flags |= SIGN;
       case 'u':
         break;
-#ifndef NOFLOAT
       case 'E':
       case 'G':
       case 'e':
@@ -398,12 +397,12 @@ repeat:
       case 'g':
         str = flt(str, va_arg(args, double), field_width, precision, *fmt, flags | SIGN);
         continue;
-#endif
       default:
         if (*fmt != '%') *str++ = '%';
         if (*fmt) {
           *str++ = *fmt;
-        } else {
+        }
+        else {
           --fmt;
         }
         continue;
@@ -439,19 +438,13 @@ int sprintf(char *buf, const char *fmt, ...)
 
 int vsnprintf(char *buf, size_t size, const char *fmt, va_list args)
 {
-  va_list args_copy;
-  int result = -1;
+  char temp_buf[size];
+  int result = vsprintf(temp_buf, fmt, args);
 
   if (size > 0) {
-    va_copy(args_copy, args);
-
-    result = vsprintf(buf, fmt, args_copy);
-    va_end(args_copy);
-
-    if (result >= size) {
-      result = size - 1;
-      buf[size - 1] = '\0';
-    }
+    size_t copy_len = (size - 1 < (size_t)result) ? size - 1 : (size_t)result;
+    strncpy(buf, temp_buf, copy_len);
+    buf[copy_len] = '\0';
   }
 
   return result;
@@ -471,27 +464,35 @@ int snprintf(char *buf, size_t size, const char *fmt, ...)
 
 int asprintf(char **str, const char *format, ...)
 {
-  va_list args;
-  va_start(args, format);
-  int size;
+  va_list args, args_copy;
+  int size, res;
 
-  size = vsnprintf(NULL, 0, format, args);
-  va_end(args);
+  va_start(args, format);
+  va_copy(args_copy, args);
+
+  size = vsnprintf(NULL, 0, format, args_copy);
+  va_end(args_copy);
 
   if (size < 0) {
+    va_end(args);
     return -1;
   }
 
   *str = (char *)malloc(size + 1);
   if (*str == NULL) {
+    va_end(args);
     return -1;
   }
 
-  va_start(args, format);
-  vsnprintf(*str, size + 1, format, args);
+  res = vsnprintf(*str, size + 1, format, args);
   va_end(args);
+  if (res < 0) {
+    free(*str);
+    *str = NULL;
+    return -1;
+  }
 
-  return size;
+  return res;
 }
 
 int printf(const char *format, ...) {
@@ -510,4 +511,36 @@ int printf(const char *format, ...) {
 
   _write(1, buffer, (size_t)len);
   return len;
+}
+
+int _vfprintf(FILE *s, const char *fmt, va_list args, unsigned int mode_flags)
+{
+  char *formatted_str = NULL;
+  int result = asprintf(&formatted_str, fmt, args);
+
+  if (result == -1 || formatted_str == NULL) {
+    return -1;
+  }
+
+  size_t len = strlen(formatted_str);
+
+  if (_write(s->fd, formatted_str, len) < 0){ /* fwrite */
+    free(formatted_str);
+    return -1;
+  }
+
+  free(formatted_str);
+  return len;
+}
+
+int fprintf(FILE *stream, const char *fmt, ...)
+{
+  va_list arg;
+  int done;
+
+  va_start (arg, fmt);
+  done = _vfprintf(stream, fmt, arg, 0);
+  va_end(arg);
+
+  return done;
 }
