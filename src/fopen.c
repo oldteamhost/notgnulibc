@@ -9,32 +9,33 @@
 
 FILE* fopen(const char* filename, const char* mode)
 {
+  const char *m = mode;
+  int flags = 0;
+
   FILE* file = (FILE*)malloc(sizeof(FILE));
   if (!file) {
     return NULL;
   }
-
   file->fd = -1;
-  int flags = 0;
-  if (strcmp(mode, "r") == 0) {
-    flags = O_RDONLY;
+
+  switch (*m++)
+  {
+    case 'r':
+      flags = O_RDONLY;
+      break;
+    case 'w':
+      flags = O_WRONLY;
+      break;
+    case 'a':
+      flags = O_WRONLY | O_APPEND;
+      break;
+    default:
+      goto fail;
   }
-  else if (strcmp(mode, "w") == 0) {
-    flags = O_WRONLY | O_CREAT | O_TRUNC;
+
+  if (m[0] == '+' || (m[0] == 'b' && m[1] == '+')) {
+    flags |= O_RDWR;
   }
-  else if (strcmp(mode, "a") == 0) {
-    flags = O_WRONLY | O_CREAT | O_APPEND;
-  }
-  else if (strcmp(mode, "r+") == 0) {
-    flags = O_RDWR;
-  }
-  else if (strcmp(mode, "w+") == 0) {
-    flags = O_RDWR | O_CREAT | O_TRUNC;
-  }
-  else if (strcmp(mode, "a+") == 0) {
-    flags = O_RDWR | O_CREAT | O_APPEND;
-  }
-  else goto fail;
 
   file->fd = open(filename, flags, 0666);
   if (file->fd == -1) goto fail;

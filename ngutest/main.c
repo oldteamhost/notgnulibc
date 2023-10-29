@@ -95,28 +95,10 @@ int main(void)
     free(__hex_hash);
   }
 
-  /* open() */
-#include "../ngubits/fcntl.h"
-  int fd = open("net.txt", O_RDWR, 0644);
-  if (fd < 0) {
-    printf("fuck!\n");
-    return 1;
-  }
-  _write(fd, "Hello\n", 6);
-  _write(fd, "Hello\n", 6);
-  _write(fd, "Hello\n", 6);
-  /* close() */
-  _close(fd);
-
-
-
   FILE *fp;
-  fp = fopen ("net.txt", "a");
-  fprintf(fp, "kekekkek\n");
+  fp = fopen ("net.txt", "wa");
+  fprintf(fp, "Hello\n");
   fclose(fp);
-
-
-
 
   printf("Goodbye, world!\n");
   return 0;
