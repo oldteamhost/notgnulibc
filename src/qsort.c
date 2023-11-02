@@ -56,17 +56,17 @@ swapfunc(char *a, char *b, size_t n, int swaptype)
       break; \
     }\
     case SWAPTYPE_LONG: { \
-      long t = *(long *)(a); \
-      *(long *)(a) = *(long *)(b); \
-      *(long *)(b) = t; \
-      break; \
-    } \
-    default: \
-      swapfunc(a, b, es, swaptype);		\
-  } \
+      long t = *(long *)(a);         \
+      *(long *)(a) = *(long *)(b);   \
+      *(long *)(b) = t;              \
+      break;                         \
+    }                                \
+    default:                         \
+      swapfunc(a, b, es, swaptype);  \
+  }                                  \
 } while (0)
 
-#define vecswap(a, b, n) 	if ((n) > 0) swapfunc(a, b, n, swaptype)
+#define vecswap(a, b, n) if ((n) > 0) swapfunc(a, b, n, swaptype)
 
 static __inline char*
 med3(char *a, char *b, char *c, int (*cmp)(const void *, const void *))

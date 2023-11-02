@@ -29,6 +29,7 @@ extern "C" {
 #include "icmp4.h"
 #include "icmp6.h"
 #include "tcp.h"
+#include "eth.h"
 #include "udp.h"
 
 #include "../ngubits/types.h"
@@ -56,6 +57,9 @@ extern "C" {
 #endif
 
 typedef u8* pkt_t;
+
+int send_ip_packet(const struct eth_nfo *eth, const u8 *packet, u32 packetlen);
+int send_ip6_packet(const struct eth_nfo *eth, const u8 *packet, u32 packetlen);
 
 pkt_t
 build_ip_pkt(SADDR, DADDR, u8 proto, u8 ttl, u16 ident, u8 tos,
