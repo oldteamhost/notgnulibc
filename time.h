@@ -57,8 +57,5 @@ size_t   strftime(char* s, size_t maxsize, const char* format,
 
 __END_DECLS
 
-
-
-
 #endif
 

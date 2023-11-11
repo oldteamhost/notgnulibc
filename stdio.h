@@ -44,6 +44,7 @@ struct stdio_file
   unsigned char ungetbuf;
   char ungotten;
 };
+
 typedef struct stdio_file FILE;
 
 FILE* fopen(const char* filename, const char* mode);
