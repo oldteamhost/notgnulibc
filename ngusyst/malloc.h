@@ -21,7 +21,7 @@ typedef struct block_info
 {
   int size;
   struct block_info *next;
-}block_info;
+} block_info;
 
 __BEGIN_DECLS
 
